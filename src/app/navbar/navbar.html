@@ -1,0 +1,51 @@
+<nav class="flex flex-row items-center justify-between gap-2.5 pl-4 pr-4 h-12">
+  <a
+    class="rounded-2xl bg-green-600 text-center text-xl text-white px-3 py-1 hover:bg-green-700 transition cursor-pointer"
+    routerLink="/"
+    routerLinkActive="bg-green-500"
+    >Discover</a
+  >
+  @if (isLoggedIn) {
+    <a
+      class="rounded-2xl bg-green-600 text-center text-xl text-white px-3 py-1 hover:bg-green-700 transition cursor-pointer"
+      routerLink="/my-images"
+      routerLinkActive="bg-green-500"
+      >My Images</a
+    >
+  }
+  @if (!isLoggedIn) {
+    <button
+      class="px-4 py-1 rounded-2xl bg-green-600 text-white hover:bg-green-700 transition"
+      (click)="goToLogin()"
+    >
+      Login
+    </button>
+    <a
+      routerLink="/account"
+      class="rounded-2xl bg-green-600 items-center text-xl text-white px-3 py-1 hover:bg-green-700 transition cursor-pointer"
+      routerLinkActive="bg-green-500"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M5.121 17.804A9 9 0 1118.88 6.196M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+        />
+      </svg>
+    </a>
+  } @else {
+    <button
+      class="px-4 py-1 rounded-2xl bg-green-600 text-white hover:bg-green-700 transition"
+      (click)="logout()"
+    >
+      Logout
+    </button>
+  }
+</nav>
