@@ -1,51 +1,37 @@
-<nav class="flex flex-row items-center justify-between gap-2.5 pl-4 pr-4 h-12">
-  <a
-    class="rounded-2xl bg-green-600 text-center text-xl text-white px-3 py-1 hover:bg-green-700 transition cursor-pointer"
-    routerLink="/"
-    routerLinkActive="bg-green-500"
-    >Discover</a
-  >
-  @if (isLoggedIn) {
+<nav class="grid grid-cols-3 items-center px-8 py-1 bg-gray-100">
+  <div></div>
+
+  <div class="flex justify-center gap-2.5">
     <a
-      class="rounded-2xl bg-green-600 text-center text-xl text-white px-3 py-1 hover:bg-green-700 transition cursor-pointer"
-      routerLink="/my-images"
-      routerLinkActive="bg-green-500"
-      >My Images</a
+      class="navElement"
+      routerLink="/"
+      routerLinkActive="border-2 border-gray-500 bg-gray-200"
+      [routerLinkActiveOptions]="{ exact: true }"
     >
-  }
-  @if (!isLoggedIn) {
-    <button
-      class="px-4 py-1 rounded-2xl bg-green-600 text-white hover:bg-green-700 transition"
-      (click)="goToLogin()"
-    >
-      Login
-    </button>
-    <a
-      routerLink="/account"
-      class="rounded-2xl bg-green-600 items-center text-xl text-white px-3 py-1 hover:bg-green-700 transition cursor-pointer"
-      routerLinkActive="bg-green-500"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M5.121 17.804A9 9 0 1118.88 6.196M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-      </svg>
+      <svg lucideCompass class="mr-1"></svg>
+      <span>Discover</span>
     </a>
-  } @else {
-    <button
-      class="px-4 py-1 rounded-2xl bg-green-600 text-white hover:bg-green-700 transition"
-      (click)="logout()"
+    @if (isLoggedIn) {
+      <a
+        class="navElement"
+        routerLink="/my-images"
+        routerLinkActive="border-2 border-gray-500 bg-gray-200"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <svg lucideBookImage class="mr-1"></svg>
+        <span>My Images</span>
+      </a>
+    }
+  </div>
+
+  <div class="flex justify-end">
+    <a
+      class="navElement"
+      [routerLink]="isLoggedIn ? '/account/settings' : '/account/login'"
+      routerLinkActive="border-2 border-gray-500 bg-gray-200"
     >
-      Logout
-    </button>
-  }
+      <svg lucideCircleUserRound class="mr-1"></svg>
+      <span>{{ isLoggedIn ? 'Account' : 'Login/Signup' }}</span>
+    </a>
+  </div>
 </nav>

@@ -1,1 +1,11 @@
 @import 'tailwindcss';
+
+.navElement {
+  @apply flex flex-row justify-center items-center rounded-2xl text-xl px-3 py-0.5
+         cursor-pointer hover:bg-gray-200
+         transition-transform duration-200
+         active:scale-95 hover:scale-105;
+}
+.navElement.border-2 {
+  @apply hover:scale-100 cursor-default;
+}
