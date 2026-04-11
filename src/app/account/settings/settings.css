@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+
+.loginButton {
+  @apply flex flex-row justify-center items-center rounded text-xl px-3 py-0.5 bg-gray-100 transition-transform duration-200 border-gray-500
+         enabled:cursor-pointer
+       enabled:hover:bg-gray-200
+         enabled:active:scale-95
+         enabled:hover:border-2
+
+         disabled:cursor-not-allowed
+         disabled:text-gray-600;
+}
+
+.inputElem {
+  @apply rounded text-xl px-3 py-0.5 bg-gray-100 hover:bg-gray-200
+         transition duration-200
+         focus:outline-none focus:ring-2 focus:ring-gray-500
+         focus:bg-gray-200;
+}

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Page } from './page/page';
 import { Login } from './account/login/login';
 import { Settings } from './account/settings/settings';
+import { authGuard } from './guards/route.guard';
 
 export const routes: Routes = [
   {
@@ -12,7 +13,8 @@ export const routes: Routes = [
   {
     path: 'my-images',
     component: Page,
-    data: { mode: 'my' },
+    data: { mode: 'my-images' },
+    canActivate: [authGuard],
   },
   {
     path: 'account/login',
@@ -21,5 +23,6 @@ export const routes: Routes = [
   {
     path: 'account/settings',
     component: Settings,
+    canActivate: [authGuard],
   },
 ];

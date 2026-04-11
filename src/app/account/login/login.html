@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="flex w-full mt-32">
+  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500">
+    <form [formGroup]="loginForm" class="flex flex-col h-56" (ngSubmit)="onLogin()">
+      <label class="text-xl"> Username: </label>
+      <input type="text" formControlName="username" class="inputElem"/>
+      <label class="text-xl"> Password: </label>
+      <input type="password" formControlName="password" class="inputElem"/>
+      @if (loginForm.errors?.['invalid']) {
+        <div class="text-red-500 text-sm">Invalid credentials</div>
+      }
+      @if (loginForm.errors?.['signUpError']) {
+        <div class="text-red-500 text-sm">An Error occured with Signup</div>
+      }
+      @if(!loginForm.valid && !loginForm.errors?.['signUpError'] && !loginForm.errors?.['invalid']){
+        <span>Username and Password need to be filled. Password must be at least 8 Signs.</span>
+      }
+      <div class="flex flex-row items-center justify-between mt-auto h-12">
+        <button type="submit" class="mr-auto loginButton" [disabled]="!loginForm.valid">Login</button>
+        <button type="button" class="ml-auto loginButton" [disabled]="!loginForm.valid" (click)="onSignup()">Signup</button>
+      </div>
+    </form>
+  </div>
+</div>

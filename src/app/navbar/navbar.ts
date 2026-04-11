@@ -16,8 +16,7 @@ export class Navbar {
   ) {}
 
   get isLoggedIn() {
-    return true;
-    //return this.authService.isLoggedIn();
+    return this.authService.isLoggedIn();
   }
 
   logout() {

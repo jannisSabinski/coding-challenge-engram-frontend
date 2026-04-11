@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './page.css',
 })
 export class Page {
-  mode: 'discover' | 'my' = 'discover';
+  mode: 'discover' | 'my-images' = 'discover';
 
   constructor(private route: ActivatedRoute) {}
 
@@ -17,6 +17,6 @@ export class Page {
   }
 
   get isMyImages() {
-    return this.mode === 'my';
+    return this.mode === 'my-images';
   }
 }

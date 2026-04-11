@@ -1,1 +1,37 @@
-<p>settings works!</p>
+<div class="flex flex-row gap-5 mt-32">
+  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500">
+    <form [formGroup]="changePasswordForm" class="flex flex-col h-52" (ngSubmit)="changePassword()">
+      <label class="text-xl"> New password: </label>
+      <input type="password" formControlName="newPassword" class="inputElem" />
+      <label class="text-xl"> Confirm new password: </label>
+      <input type="password" formControlName="repeat" class="inputElem" />
+      @if (changePasswordForm.errors?.['error']) {
+        <div class="text-red-500 text-sm">An Error occured during password change.</div>
+      }
+      @if (!changePasswordForm.valid && !changePasswordForm.errors?.['error']) {
+        <span>New password must be at least 8 Signs.</span>
+      }
+      @if (changePasswordForm.errors?.['mismatch']) {
+        <span>Password and confirm password must match.</span>
+      }
+      <button type="submit" class="mt-auto loginButton" [disabled]="!changePasswordForm.valid">
+        Change Password
+      </button>
+    </form>
+  </div>
+  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500">
+    <div class="flex flex-col h-52">
+      <span class="text-xl">Deleting the Account will also delete all uploaded Pictures.</span>
+      <span class="text-xl">Make sure you save them elsewhere, before you proceed!</span>
+      <button type="button" class="mt-auto loginButton" (click)="deleteAccount()">
+        Delete Account
+      </button>
+    </div>
+  </div>
+</div>
+@if (showPopup()) {
+  <app-popup
+    [popUpMessage]="this.popUpMessage"
+    (closeClicked)="this.showPopup.set(false)"
+  ></app-popup>
+}
