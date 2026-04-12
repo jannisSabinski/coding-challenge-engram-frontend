@@ -1,1 +1,57 @@
-<p>{{mode}} works!</p>
+<div class="flex flex-col h-full w-screen items-center justify-center">
+  <!--Upload,Search,Filter-->
+  <div class="flex flex-row bg-gray-100 rounded items-center mt-3">
+    @if (this.isMyImages) {
+      <button class="right-button" (click)="this.showUploadPopup.set(true)">
+        <svg lucideUpload></svg>
+        <span class="text-xl ml-1">Upload</span>
+      </button>
+    }
+  </div>
+  <!--Image-grid-->
+
+  <!--Page Controls-->
+  <div class="mt-auto w-screen">
+    <app-page-controls></app-page-controls>
+  </div>
+</div>
+
+<!--Upload Popup-->
+@if (this.showUploadPopup()) {
+  <app-popup (closeClicked)="this.showUploadPopup.set(false)" [width]="'80%'">
+    <div
+      class="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-xl h-96"
+      (drop)="onFileDrop($event)"
+      (dragover)="$event.preventDefault()"
+    >
+      <span class="text-gray-300 mb-4"
+        >Drag & Drop Image Here.
+        Accepted File Types are png and jpg.
+        Filesize must not exceed 20Mb</span
+      >
+
+      <input type="file" class="hidden" #fileInput (change)="onFileSelected($event)" />
+      @if (selectedFile) {
+        <div class="relative group mt-3">
+          <button class="file-display">
+            {{ selectedFile.name }}
+          </button>
+
+          <!-- Hover overlay -->
+          <div class="file-overlay" (click)="selectedFile = null">
+            <svg lucideCircleX class="w-6"></svg>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="flex flex-row justify-between w-full items-center h-11">
+      <button class="upload-button mt-4" (click)="fileInput.click()" [disabled]="selectedFile">
+        Select File
+      </button>
+
+      <button class="upload-button mt-4" (click)="upload()" [disabled]="!selectedFile">
+        Upload
+      </button>
+    </div>
+  </app-popup>
+}

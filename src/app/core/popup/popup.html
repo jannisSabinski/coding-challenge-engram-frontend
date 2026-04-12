@@ -1,13 +1,11 @@
 <div class="fixed top-0 left-0 w-full h-screen z-997">
-  <div class="absolute top-0 left-0 w-full h-full bg-zinc-800/80 z-997" (click)="closeClicked.emit()"></div>
+  <div class="absolute top-0 left-0 w-full h-full bg-zinc-800/80 z-997"></div>
   <div class="relative w-full min-h-full flex justify-center items-center py-16 z-998">
-    <div class="relative bg-gray-100 rounded-lg p-10 shadow-2xl w-100">
+    <div class="relative bg-gray-100 rounded-lg p-10 shadow-2xl" [style]="'width: '+width+';'">
       <button class="absolute top-1 right-1 flex justify-center items-center w-10 h-10" (click)="closeClicked.emit()">
-        <svg lucideCircleX class="text-red-600"></svg>
+        <svg lucideCircleX class="cursor-pointer"></svg>
       </button>
-      <div>
-        <span class="text-xl">{{this.popUpMessage}}</span>
-      </div>
+      <ng-content></ng-content>
     </div>
   </div>
 </div>

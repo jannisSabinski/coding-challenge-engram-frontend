@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+.right-button {
+  @apply flex flex-row justify-center items-center rounded-2xl text-xl px-3
+
+         transition-transform duration-200
+         enabled:cursor-pointer
+         enabled:hover:bg-gray-200
+         disabled:text-gray-500;
+}
+

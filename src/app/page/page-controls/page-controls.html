@@ -1,0 +1,43 @@
+<div class="flex flex-row justify-between bg-gray-100 h-12 mt-1 w-full pl-20 pr-20 pt-1 pb-1">
+  <!--left input-->
+  <div class="flex flex-row items-center">
+    <div class="relative flex items-center">
+      <select [formControl]="itemsPerPageControl" class="appearance-none right-button h-10">
+        @for (option of options; track option.value) {
+          <option>
+            {{ option.viewValue }}
+          </option>
+        }
+      </select>
+      <svg lucideChevronDown class="absolute right-1 pointer-events-none"></svg>
+    </div>
+    <span class="ml-2 text-xl">{{ getResultRange() }}</span>
+  </div>
+  <!--right Buttons-->
+  <div class="flex flex-row">
+    <button class="right-button" (click)="firstPage()" [disabled]="currentPage === 1">
+      <svg lucideChevronsLeft class="w-6"></svg>
+    </button>
+    <button class="right-button" (click)="previousPage()" [disabled]="currentPage === 1">
+      <svg lucideChevronLeft class="w-6"></svg>
+    </button>
+    @for (page of getPageRange(); track page) {
+      <button
+        [ngClass]="{
+          'right-button': true,
+          'border-2 border-gray-500': page === currentPage,
+        }"
+        [disabled]="page === currentPage"
+        (click)="goToPage(page)"
+      >
+        <span>{{ page }}</span>
+      </button>
+    }
+    <button class="right-button" (click)="nextPage()" [disabled]="currentPage === totalPages">
+      <svg lucideChevronRight class="w-6"></svg>
+    </button>
+    <button class="right-button" (click)="lastPage()" [disabled]="currentPage === totalPages">
+      <svg lucideChevronsRight class="w-6"></svg>
+    </button>
+  </div>
+</div>

@@ -30,8 +30,7 @@
   </div>
 </div>
 @if (showPopup()) {
-  <app-popup
-    [popUpMessage]="this.popUpMessage"
-    (closeClicked)="this.showPopup.set(false)"
-  ></app-popup>
+  <app-popup (closeClicked)="this.showPopup.set(false)">
+    <span class="text-xl"> {{ this.popUpMessage }}</span>
+  </app-popup>
 }
