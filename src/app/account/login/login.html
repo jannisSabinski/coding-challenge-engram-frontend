@@ -1,5 +1,5 @@
 <div class="flex w-full mt-32">
-  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500">
+  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500 relative">
     <form [formGroup]="loginForm" class="flex flex-col h-56" (ngSubmit)="onLogin()">
       <label class="text-xl"> Username: </label>
       <input type="text" formControlName="username" class="inputElem"/>
@@ -19,5 +19,9 @@
         <button type="button" class="ml-auto loginButton" [disabled]="!loginForm.valid" (click)="onSignup()">Signup</button>
       </div>
     </form>
+
+    @if(loading()){
+      <app-loading-spinner></app-loading-spinner>
+    }
   </div>
 </div>

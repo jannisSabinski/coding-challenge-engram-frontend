@@ -1,6 +1,6 @@
-<div class="flex flex-col h-full w-screen items-center justify-center">
+<div class="flex flex-col h-full w-full items-center justify-center">
   <!--Upload,Search,Filter-->
-  <div class="flex flex-row bg-gray-100 rounded items-center mt-3">
+  <div class="flex flex-row bg-gray-100 rounded items-center m-2">
     @if (this.isMyImages) {
       <button class="right-button" (click)="this.showUploadPopup.set(true)">
         <svg lucideUpload></svg>
@@ -9,10 +9,26 @@
     }
   </div>
   <!--Image-grid-->
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4 w-full flex-1 min-h-0 overflow-y-auto">
+    @for (pic of pictures(); track pic.id) {
+      <app-picture-card
+        [picture]="pic"
+        [showButtons]="isMyImages"
+        (pictureDeleted)="onDelete($event)"
+        (pictureTagChange)="onPictureTagChange($event)"
+      />
+    }
+  </div>
 
   <!--Page Controls-->
   <div class="mt-auto w-screen">
-    <app-page-controls></app-page-controls>
+    <app-page-controls
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      [totalItems]="totalItems"
+      (pageChange)="onPageChange($event)"
+      (itemsPerPageChange)="onItemsPerPageChange($event)"
+    ></app-page-controls>
   </div>
 </div>
 
@@ -25,9 +41,8 @@
       (dragover)="$event.preventDefault()"
     >
       <span class="text-gray-300 mb-4"
-        >Drag & Drop Image Here.
-        Accepted File Types are png and jpg.
-        Filesize must not exceed 20Mb</span
+        >Drag & Drop Image Here. Accepted File Types are png and jpg. Filesize must not exceed
+        20Mb</span
       >
 
       <input type="file" class="hidden" #fileInput (change)="onFileSelected($event)" />

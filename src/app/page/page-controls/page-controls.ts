@@ -31,7 +31,7 @@ export class PageControls {
   @Output() pageChange = new EventEmitter<number>();
   @Output() itemsPerPageChange = new EventEmitter<number>();
 
-  itemsPerPageControl = new FormControl(10);
+  itemsPerPageControl = new FormControl<number>(10);
 
   options = [
     { value: 1, viewValue: '1' },
@@ -41,6 +41,8 @@ export class PageControls {
   ];
 
   ngOnInit() {
+    this.itemsPerPageControl.setValue(10, { emitEvent: false });
+
     this.itemsPerPageControl.valueChanges.subscribe((value) => {
       if (value != null) {
         this.itemsPerPageChange.emit(value);
@@ -71,13 +73,7 @@ export class PageControls {
   getResultRange(): string {
     const value = this.itemsPerPageControl.value!;
     const start = (this.currentPage - 1) * value + 1;
-
-    let end: number;
-    if (value === 999) {
-      end = this.totalItems;
-    } else {
-      end = Math.min(this.currentPage * value, this.totalItems);
-    }
+    const end = Math.min(this.currentPage * value, this.totalItems);
     return `${start} - ${end} of ${this.totalItems}`;
   }
 

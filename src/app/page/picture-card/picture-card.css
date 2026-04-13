@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+
+.upload-button {
+  @apply flex flex-row justify-center items-center rounded-2xl text-xl px-3 py-1
+         bg-gray-200 border-gray-500
+         transition-transform duration-200
+         enabled:cursor-pointer
+         enabled:hover:bg-gray-300
+         enabled:hover:border-2
+         disabled:text-gray-500;
+}
+
+.tag {
+  @apply relative px-2 py-1 rounded bg-gray-200;
+}
+.tag-overlay {
+  @apply absolute inset-0 hidden
+         items-center justify-center
+         bg-gray-300/60
+         border-2 border-gray-500
+         rounded
+         cursor-pointer
+         transition duration-200;
+}
+.group:hover .tag-overlay {
+  @apply flex;
+}
+
+.loginButton {
+  @apply flex flex-row justify-center items-center rounded text-xl px-3 py-0.5 bg-gray-100 transition-transform duration-200 border-gray-500
+         enabled:cursor-pointer
+       enabled:hover:bg-gray-200
+         enabled:active:scale-95
+         enabled:hover:border-2
+
+         disabled:cursor-not-allowed
+         disabled:text-gray-600;
+}
+
+.inputElem {
+  @apply rounded text-xl px-3 py-0.5 bg-gray-100 hover:bg-gray-200
+         transition duration-200
+         focus:outline-none focus:ring-2 focus:ring-gray-500
+         focus:bg-gray-200;
+}

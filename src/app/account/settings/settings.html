@@ -1,5 +1,5 @@
 <div class="flex flex-row gap-5 mt-32">
-  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500">
+  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500 relative">
     <form [formGroup]="changePasswordForm" class="flex flex-col h-52" (ngSubmit)="changePassword()">
       <label class="text-xl"> New password: </label>
       <input type="password" formControlName="newPassword" class="inputElem" />
@@ -18,8 +18,11 @@
         Change Password
       </button>
     </form>
+    @if (changePwLoading()) {
+      <app-loading-spinner></app-loading-spinner>
+    }
   </div>
-  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500">
+  <div class="border-2 rounded-2xl p-6 w-100 border-gray-500 relative">
     <div class="flex flex-col h-52">
       <span class="text-xl">Deleting the Account will also delete all uploaded Pictures.</span>
       <span class="text-xl">Make sure you save them elsewhere, before you proceed!</span>
@@ -27,6 +30,9 @@
         Delete Account
       </button>
     </div>
+    @if (deleteLoading()) {
+      <app-loading-spinner></app-loading-spinner>
+    }
   </div>
 </div>
 @if (showPopup()) {

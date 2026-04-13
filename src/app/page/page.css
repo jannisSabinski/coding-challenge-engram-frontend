@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .right-button {
-  @apply flex flex-row justify-center items-center rounded-2xl text-xl px-3 py-1
+  @apply flex flex-row justify-center items-center rounded text-xl px-3 py-1
 
          transition-transform duration-200
          enabled:cursor-pointer
@@ -10,7 +10,7 @@
 }
 
 .upload-button {
-  @apply flex flex-row justify-center items-center rounded-2xl text-xl px-3 py-1
+  @apply flex flex-row justify-center items-center rounded text-xl px-3 py-1
          bg-gray-200 border-gray-500
          transition-transform duration-200
          enabled:cursor-pointer

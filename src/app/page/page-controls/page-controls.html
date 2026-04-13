@@ -2,14 +2,14 @@
   <!--left input-->
   <div class="flex flex-row items-center">
     <div class="relative flex items-center">
-      <select [formControl]="itemsPerPageControl" class="appearance-none right-button h-10">
+      <select [formControl]="itemsPerPageControl" class="appearance-none right-button h-10 w-14">
         @for (option of options; track option.value) {
-          <option>
+          <option [value]="option.value">
             {{ option.viewValue }}
           </option>
         }
       </select>
-      <svg lucideChevronDown class="absolute right-1 pointer-events-none"></svg>
+      <svg lucideChevronDown class="absolute right-0 pointer-events-none"></svg>
     </div>
     <span class="ml-2 text-xl">{{ getResultRange() }}</span>
   </div>
@@ -33,10 +33,10 @@
         <span>{{ page }}</span>
       </button>
     }
-    <button class="right-button" (click)="nextPage()" [disabled]="currentPage === totalPages">
+    <button class="right-button" (click)="nextPage()" [disabled]="currentPage >= totalPages">
       <svg lucideChevronRight class="w-6"></svg>
     </button>
-    <button class="right-button" (click)="lastPage()" [disabled]="currentPage === totalPages">
+    <button class="right-button" (click)="lastPage()" [disabled]="currentPage >= totalPages">
       <svg lucideChevronsRight class="w-6"></svg>
     </button>
   </div>

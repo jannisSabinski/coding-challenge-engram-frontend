@@ -1,1 +1,58 @@
-<p>picture-card works!</p>
+<div class="relative w-full aspect-square rounded overflow-hidden border border-grey-500">
+  <img [src]="pictureUrl" class="w-full h-full object-cover" loading="lazy" />
+  @if (showButtons) {
+    <!--Deletion and tags-->
+    <div class="absolute top-2 right-2 flex gap-2">
+      <button class="upload-button" (click)="delete()">
+        <svg lucideTrash></svg>
+      </button>
+
+      <!-- Edit Tags -->
+      <button class="upload-button" (click)="showTagEditPopup.set(true)">
+        <svg lucidePencil></svg>
+      </button>
+    </div>
+  }
+  <div class="absolute bottom-0 left-0 w-full p-2 bg-black/10 flex flex-wrap gap-1 max-h-[50%]">
+    @for (tag of picture.tags; track tag.id) {
+      <span class="tag text-xs">
+        {{ tag.tagName }}
+      </span>
+    }
+  </div>
+  @if(deleteLoading()) {
+    <app-loading-spinner></app-loading-spinner>
+  }
+</div>
+@if (showTagEditPopup()) {
+  <app-popup (closeClicked)="showTagEditPopup.set(false)" [width]="'60%'">
+    <span class="text-xl mb-1">Remove Current Tags:</span>
+    <div class="w-full max-h-[70vh] min-h-[30vh] overflow-y-auto flex flex-wrap m-2 gap-2 items-start content-start border-2 border-gray-500 rounded p-3">
+      @for (tag of picture.tags; track tag.id) {
+        <div class="relative group self-start">
+          <button class="tag text-xl">
+            {{ tag.tagName }}
+          </button>
+          <div class="tag-overlay" (click)="removeTag(tag.id)">
+            <svg lucideCircleX class="w-6"></svg>
+          </div>
+        </div>
+      }
+      @if(picture.tags.length == 0){
+        <span class="text-xl ml-2 mt-2">There are no tags to remove</span>
+      }
+    </div>
+    <span class="text-xl mb-1">Add a Tag:</span>
+    <form
+      [formGroup]="addTagForm"
+      class="flex flex-row items-center justify-between p-2"
+      (ngSubmit)="addTag()"
+    >
+      <input type="text" formControlName="tagName" class="inputElem" />
+      <button type="submit" class="loginButton h-10" [disabled]="!addTagForm.valid">Add</button>
+    </form>
+    @if(tagLoading()) {
+      <app-loading-spinner></app-loading-spinner>
+    }
+  </app-popup>
+}
