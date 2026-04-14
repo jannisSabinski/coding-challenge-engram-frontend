@@ -1,5 +1,5 @@
 export const environment = {
-  apiURL: 'coding-challenge-engram-backend-production.up.railway.app',
+  apiURL: 'https://coding-challenge-engram-backend-production.up.railway.app',
   bucketUrl: 'https://fytbrrnothhgjtnqqdiq.supabase.co/storage/v1/object/public/pictures/',
 };
 
