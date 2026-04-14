@@ -1,59 +1,41 @@
-# CodingChallengeEngramFrontend
+# Coding Challenge Engram – Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Angular Website zur Fotoverwaltung mit Tailwind styling.
 
-## Development server
+## Tech-Stack
+- **Angular** – Single Page Application
 
-To start a local development server, run:
+### Modulare Struktur
+Die Anwendung ist in logische Bereiche unterteilt:
+* **Public Gallery (`/`)**: Anzeige aller  Bilder.
+* **Account-Bereich (`/account/settings`), (`/account/login`)**: Login-Form und Account verwaltung.
+* **My Images (`/my-images`)**: Privater Bereich mit erweiterten CRUD-Funktionen.
 
-```bash
-ng serve
-```
+### Authentifizierung & Security
+* **Session-Simulation**: Anmeldedaten werden bei Login in einem Service im Arbeitspeicher vorgehalten um Sessions zu simulieren
+* **Interceptor**: Ein zentraler `AuthInterceptor` hängt Basic-Auth-Header automatisch an alle Backend-Requests an.
+* **Guards**: `CanActivate`-Guards überprüfen für My Images und Account Settings ob Daten im Arbeitsspeicher stehen und leiten ansonsten zur Login Page um.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Komponenten
+* **Page-Component**: Kernkomponente, welche Bilder anzeigt. Macht eigene Bilder unter My Images durch Route Data tagbar und ermöglicht hier dann auch das hochladen neuer Bilder
+* **Login-Component**: stellt Login und Signup Form zur Verfügung
+* **Settings-Component**: ermöglicht das Ändern von Passwörtern und das Löschen von Accounts
+* **Popup-, Loading-Spinner-Component**: wiederverwendbare komponenten für Lade-Animationen und Pop-Ups
+* **Picture-Card**: Anzeige von den einzelnen Bildern mit Tags
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
+## Lokales Setup
+1. in environment.ts local environment auskommentieren / prod environment einkommentieren
+2. npm install \
+   npm start
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+App läuft dann unter http://localhost:4200.
+Das Backend muss separat gestartet werden (siehe Backend README).
 
-```bash
-ng generate --help
-```
+## Live Demo
+https://coding-challenge-engram-frontend-production.up.railway.app
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Test-Zugangsdaten
+Name: Jannis
+Passwort: testtest
