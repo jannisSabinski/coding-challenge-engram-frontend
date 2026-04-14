@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
-import { apiURL } from '../../environment.local';
+import { environment } from '../../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class AuthService {
   login(username: string, password: string) {
     const encoded = btoa(`${username}:${password}`);
     return this.http
-      .get(`${apiURL}/user/validate`, {
+      .get(`${environment.apiURL}/user/validate`, {
         headers: {
           Authorization: `Basic ${encoded}`,
         },
@@ -28,7 +28,7 @@ export class AuthService {
 
   signup(username: string, password: string) {
     return this.http
-      .post(`${apiURL}/user/signUp`, {
+      .post(`${environment.apiURL}/user/signUp`, {
         name: username,
         password: password,
       })
@@ -42,7 +42,7 @@ export class AuthService {
   changePassword(newPassword: string) {
     const username = atob(this.credentials!).split(':')[0];
     return this.http
-      .patch(`${apiURL}/user/password`, {
+      .patch(`${environment.apiURL}/user/password`, {
         newPassword: newPassword,
       })
       .pipe(
@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   deleteAccount() {
-    return this.http.delete(`${apiURL}/user`).pipe(
+    return this.http.delete(`${environment.apiURL}/user`).pipe(
       tap(() => {
         this.credentials = null;
       }),
